@@ -1,0 +1,136 @@
+/* General page style */
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+  background: #f4f6f8;
+  color: #333;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #2d3e50;
+  color: white;
+}
+
+header h1 {
+  margin: 0;
+}
+
+header button {
+  padding: 10px 15px;
+  border: none;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+header button:hover {
+  background: #45a049;
+}
+
+/* Book container */
+#bookContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Book card */
+.book-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.book-card h3 {
+  margin: 0;
+}
+
+.book-card button {
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Buttons inside cards */
+.book-card .toggle {
+  background: #2196f3;
+  color: white;
+}
+
+.book-card .remove {
+  background: #f44336;
+  color: white;
+}
+
+.book-card button:hover {
+  opacity: 0.85;
+}
+
+/* Dialog */
+dialog {
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Buttons */
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+form button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button[type="submit"] {
+  background: #4caf50;
+  color: white;
+}
+
+#closeDialog {
+  background: #777;
+  color: white;
+}

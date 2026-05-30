@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Library</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Library</h1>
+    <button id="newBookBtn">+ New Book</button>
+  </header>
+
+  <main>
+    <!-- THIS MUST MATCH JS -->
+    <div id="bookContainer"></div>
+  </main>
+
+  <!-- Dialog -->
+  <dialog id="bookDialog">
+    <form id="bookForm">
+
+      <h2>Add New Book</h2>
+
+      <input type="text" id="title" placeholder="Title" required />
+      <input type="text" id="author" placeholder="Author" required />
+      <input type="number" id="pages" placeholder="Pages" required />
+
+      <label>
+        <input type="checkbox" id="read" />
+        Read already?
+      </label>
+
+      <div style="display:flex; gap:10px;">
+        <button type="submit">Add Book</button>
+        <button type="button" id="closeDialog">Cancel</button>
+      </div>
+
+    </form>
+  </dialog>
+
+  <script src="library.js"></script>
+</body>
+</html>
