@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+GB+S+Guides&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    display:flex;
+    height:100vh;
+
+    overflow:hidden;
+
+    font-family:"Playwrite GB S Guides", cursive;
+    font-size:14px;
+}
+
+
+.left-side{
+    width:40%;
+    height:100vh;
+
+    background-image:url(flbck.png);
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+
+.shadow{
+    width:100%;
+    padding:20px;
+
+    background:rgba(0,0,0,0.45);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+}
+
+
+.shadow h1{
+    color:white;
+    font-size:32px;
+}
+
+
+.log{
+    width:70px;
+    height:70px;
+}
+
+
+.right-side{
+    width:60%;
+    height:100vh;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+
+    padding:40px;
+    overflow:auto;
+}
+
+
+.mainwritting{
+    margin-bottom:30px;
+}
+
+.mainwritting h1{
+    margin-bottom:10px;
+}
+
+
+.forma1 fieldset{
+    display:flex;
+    gap:20px;
+
+    padding:10px;
+    border: none;
+
+    box-shadow:0 2px 8px rgba(0,0,0,0.15);
+}
+
+
+.l-side,
+.r-side{
+    width:50%;
+
+    display:flex;
+    flex-direction:column;
+}
+
+
+label{
+    margin-bottom:5px;
+}
+
+
+input{
+    padding:10px;
+    margin-bottom:15px;
+
+    border:1px solid #ccc;
+    border-radius:5px;
+
+    font-family:inherit;
+}
+
+
+button{
+    margin-top:15px;
+    padding:12px 20px;
+
+    border:none;
+    border-radius:5px;
+
+    background:#637d9f;
+    color:white;
+
+    cursor:pointer;
+
+    font-family:inherit;
+}
+
+button:hover{
+    background:#4f6785;
+}
+
