@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;/*adds space around the page content*/
+}
+
+h1 {
+    color: rgba(0, 0, 139, 0.518);
+}
+
+div {
+    margin-bottom: 20px;/*adds space below message div so they dont run together*/
+}

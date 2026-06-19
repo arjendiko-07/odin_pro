@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <!--here we get title from the object passed in res.render("index", {title: ...})-->
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <h1><%= title %></h1>
+    <!--outputs the title again as the page heading-->
+    <a href="/new">Create New Message</a>
+    <!--links to the form page-->
+    <hr>
+    
+    <% messages.forEach((message, index) => {%>
+        <!--message current iteam index is its position-->
+        <div>
+            <h3>User: <%= message.user %></h3><!--outputs the users name-->
+            <p><%= message.text %></p>
+            <small><%= message.added %></small>
+            <br><br>
+
+            <!--Open specific messages-->
+            <a href="/message/<%= index %>"> Open </a>
+            <hr>
+        </div>
+    <% }) %>   
+    <!--close the for each loop--> 
+</body>
+</html>

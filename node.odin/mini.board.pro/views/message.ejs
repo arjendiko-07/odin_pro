@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Message Details</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <h1>Message Details</h1>
+
+    <% if (message) { %>
+    <!--checked if a message object was passed from the router-->
+    <!--even through we handle 404 in the router, this is a safe extra check-->
+        <h2>User: <%= message.user %></h2>
+        <p><%= message.text %></p>
+        <p><%= message.added %></p>
+        <!--outputs the tree properties of the message object-->
+    <% } else { %>
+        <!--if for some reason message is undefined/null-->
+
+        <h2>Message not found</h2>
+
+    <% } %>
+
+    <br>
+    <a href="/">Back Home</a>
+
+</body>
+</html>
