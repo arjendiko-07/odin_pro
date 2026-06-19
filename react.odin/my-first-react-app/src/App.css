@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}/*removes the default browser spacing, margin is outside space, padding is inside space.*/
+
+body {
+  background: #f4f4f4;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+}/*centers the app on screen (margin: auto), limits width to 800*/
+
+section {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}/*each section gets a white card with rounded corners*/
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}/*inputs stretch full width with spacing betweeen them*/
+
+button {
+  padding: 10px 20px;
+  cursor: pointer;
+}/*buttons have comfortable padding; cursor changes to a hand on hover*/
