@@ -1,0 +1,24 @@
+<h1>Members Only</h1>
+
+<% if (user) {%>
+    <p>Welcome <%= user.firstName %></p>
+    <a href="/messages/new">Create Message</a>
+    <a href="/auth/logout">Logout</a>
+<% } else { %>
+    <a href="/auth/login">Login</a>
+    <a href="/auth/signup">Signup</a>
+<% } %>
+
+<hr>
+
+<% messages.forEach(msg=>{ %>
+    <div>
+        <h3><%= msg.title %></h3>
+        <p><%= msg.text %></p>
+
+        <% if (user && user.isMember) { %>
+            <small>By: <%= msg.user.firstName %></small>
+            <small><%= msg.createdAt.toDateString() %></small>
+            <% } %>
+    </div>
+<% }) %>
