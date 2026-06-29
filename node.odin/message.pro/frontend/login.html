@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+
+<h2>Register</h2>
+<form id="registerForm">
+    <input id="regUsername" placeholder="username" required />
+    <input id="regPassword" type="password" placeholder="password" required />
+    <button type="submit">Register</button>
+</form>
+
+<hr>
+
+<h2>Login</h2>
+<form id="loginForm">
+    <input id="loginUsername" placeholder="username" required />
+    <input id="loginPassword" type="password" placeholder="password" required />
+    <button type="submit">Login</button>
+</form>
+
+<p id="msg"></p>
+
+<script>
+
+const API = "http://localhost:3000";
+
+// REGISTER
+document.getElementById("registerForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById("regUsername").value;
+    const password = document.getElementById("regPassword").value;
+
+    const res = await fetch(`${API}/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ username, password })
+    });
+
+    document.getElementById("msg").textContent = await res.text();
+});
+
+// LOGIN
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById("loginUsername").value;
+    const password = document.getElementById("loginPassword").value;
+
+    const res = await fetch(`${API}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ username, password })
+    });
+
+    const text = await res.text();
+    document.getElementById("msg").textContent = text;
+
+    if (text === "Logged in") {
+        window.location.href = "chat.html";
+    }
+});
+
+</script>
+
+</body>
+</html>
