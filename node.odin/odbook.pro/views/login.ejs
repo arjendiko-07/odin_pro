@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <div class="log">
+        <img src="/img/logo4.jpg" id="logo" alt="logo">
+        <h1>Welcome back!</h1>
+
+        <form action="/auth/login" method="POST" id="login-form">
+            <input type="text" name="username" id="username" placeholder="Username" />
+            <input type="password" name="password" id="password" placeholder="Password" />
+            <p id="error-msg" style="color:red;"></p>
+            <button type="submit">Login</button>
+            <a href="/signup">Not a participant yet? Sign up here</a>
+        </form>
+
+        <footer>
+            <p>© 2026 SocialMed</p>
+        </footer>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+</html>

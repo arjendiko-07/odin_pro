@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+GB+S+Guides&display=swap');
+
+body{
+    font-family:"Playwrite GB S Guides", cursive;
+    font-size:14px;
+}
+
+/* links */
+a{
+    text-decoration:none;
+}
+
+a:link{ color:black; }
+a:visited{ color:rgb(167, 77, 148);  }
+a:hover{ color:rgb(220, 139, 192); }
+a:active{ color:rgb(167, 77, 148); }
+
+/* navbar */
+.navbar{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    background-image: url(https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI1LTA1L3NyLWltYWdlLTI4MDUyNS10YS1zLTQwMV8yLmpwZw.jpg);
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    padding:10px;
+}
+
+#logo{
+    border-radius:50%;
+    width:120px;
+    height:120px;
+}
+
+/* profile */
+.profile{
+    display:flex;
+    align-items:center;
+    gap:40px;
+    padding:10px;
+}
+
+.left-p > img{
+    border-radius:50%;
+    width:200px;
+    height:200px;
+    margin-bottom:20px;
+}
+
+.create-post{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    gap:20px;
+    padding:10px;
+}
+
+.create-post input, textarea{
+    width:300px;
+    padding:5px 10px;
+    margin-top:10px;
+    background:white;
+    border:3px solid rgb(220, 139, 192);
+    border-radius:25px;
+    outline:none;
+    font-family:"Playwrite GB S Guides", cursive;
+}
+.create-post button{
+    margin:20px 15px 15px;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    background:rgb(220, 139, 192);
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.2s;
+}
+
+/* POSTS (carousel version) */
+.posts{
+    display:flex;
+    overflow-x:auto;
+    gap:20px;
+    padding:20px;
+    scroll-snap-type:x mandatory;
+}
+
+.posts::-webkit-scrollbar{
+    display:none;
+}
+
+.post{
+    flex:0 0 auto;
+    width:300px;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    transition:0.3s;
+    display:flex;
+    flex-direction:column;
+    scroll-snap-align:start;
+}
+
+.post:hover{
+    transform:translateY(-8px);
+}
+
+.post img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+#avatar{
+    border-radius:50%;
+    width:50px;
+    height:50px;
+    margin-bottom:20px
+}
+.post h6{
+    margin:15px;
+}
+
+.post p{
+    margin:0 15px 15px;
+    color:rgb(220, 139, 192);
+    line-height:1.5;
+}
+
+.post button{
+    margin:20px 15px 15px;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    background:rgb(220, 139, 192);
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.2s;
+}
+
+.post button:hover{
+    transform:scale(1.05);
+}
+
+/* search */
+.search{
+    display:flex;
+    justify-content:center;
+    margin:30px 0;
+}
+
+#search-input{
+    width:300px;
+    padding:12px 20px;
+    margin-top:20px;
+    background:white;
+    border:3px solid rgb(220, 139, 192);
+    border-radius:25px;
+    outline:none;
+    font-family:"Playwrite GB S Guides", cursive;
+}
+
+.search button{
+    margin:20px 15px 15px;
+    padding:12px;
+    border:none;
+    border-radius: 50%;;
+    background:rgb(220, 139, 192);
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.2s;
+}
+
+/* USERS (carousel fixed) */
+.users{
+    display:flex;
+    overflow-x:auto;
+    gap:20px;
+    padding:20px;
+    width:100%;
+    scroll-snap-type:x mandatory;
+}
+
+.users::-webkit-scrollbar{
+    display:none;
+}
+
+.user{
+    flex:0 0 auto;
+    width:180px;
+    background:white;
+    border-radius:15px;
+    padding:15px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    scroll-snap-align:start;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.user img{
+    height:100px;
+    width:100px;
+    border-radius:50%;
+}
+
+.user p{
+    margin:10px 0;
+}
+
+.user button{
+    padding:8px 15px;
+    border:none;
+    border-radius:20px;
+    background:rgb(220, 139, 192);
+    color:white;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.2s;
+}
+
+.user button:hover{
+    transform:scale(1.05);
+}
+
+/* footer */
+footer{
+    text-align:center;
+    padding:20px;
+}
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+
+    /* NAVBAR */
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    /* PROFILE */
+    .profile {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    /* POSTS */
+    .posts {
+        padding: 10px;
+    }
+
+    .post {
+        width: 90%;
+        margin: auto;
+    }
+
+    /* USERS */
+    .users {
+        padding: 10px;
+    }
+
+    .user {
+        width: 150px;
+    }
+
+    /* SEARCH */
+    #search-input {
+        width: 90%;
+    }
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <div class="log">
+        <img src="/img/logo4.jpg" id="logo" alt="logo">
+        <h1>Join our community!</h1>
+
+        <!-- id="signup-form" lets script.js attach the validation listener -->
+        <form action="/auth/signup" method="POST" id="signup-form">
+            <input type="text" name="username" id="username" placeholder="Username" />
+            <input type="text" name="name" id="name" placeholder="Name" />
+            <input type="number" name="age" id="age" placeholder="Age" />
+            <input type="password" name="password" id="password" placeholder="Password" />
+            <input type="text" name="profile_picture" placeholder="Profile Pic URL" />
+            <textarea name="bio" placeholder="Bio"></textarea>
+
+            <!-- Error shows here: either from script.js (empty fields) or ?error= from server -->
+            <p id="error-msg" style="color:red;"></p>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <a href="/login">Already joined? Log in here!</a>
+
+        <footer>
+            <p>© 2026 SocialMed</p>
+        </footer>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>

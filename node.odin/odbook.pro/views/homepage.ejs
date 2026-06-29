@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialMed</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <img src="/img/logo4.jpg" id="logo" alt="logo">
+    <h1>SocialMed</h1>
+    <a href="/logout">LogOut</a>
+</div>
+
+<!-- Logged-in user profile -->
+<div class="profile">
+    <div class="left-p">
+        <img src="<%= user.profile_picture %>" alt="profile pic" />
+        <h3><%= user.username %></h3>
+    </div>
+    <div class="right-p">
+        <p><%= user.bio %></p>
+    </div>
+</div>
+
+<hr>
+
+<!-- Create post -->
+<div class="create-post">
+    <h3>New Post</h3>
+    <form id="create-post-form">
+        <textarea name="content" id="post-content" placeholder="What's on your mind?" required></textarea>
+        <input type="text" name="image_url" id="post-image" placeholder="Image URL (optional)" />
+        <button type="submit">Post</button>
+    </form>
+</div>
+
+<hr>
+
+<!-- Posts feed -->
+<h3>Check out peoples posts:</h3>
+<div class="posts">
+    <% posts.forEach(post => { %>
+        <div class="post">
+            <div class="post-author">
+                <img src="<%= post.profile_picture %>" alt="avatar" id="avatar" />
+                <strong><%= post.username %></strong>
+            </div>
+            <% if (post.image_url) { %>
+                <img src="<%= post.image_url %>" alt="post image" class="post-img" />
+            <% } %>
+            <p><%= post.content %></p>
+
+            <!-- data-post-id uses pid to match the db -->
+            <button data-post-id="<%= post.pid %>" onclick="likePost('<%= post.pid %>')">
+                Like (<%= post.like_count %>)
+            </button>
+
+            <div class="comments">
+                <% post.comments.forEach(comment => { %>
+                    <p><strong><%= comment.username %>:</strong> <%= comment.content %></p>
+                <% }) %>
+            </div>
+
+            <form onsubmit="commentPost(event, '<%= post.pid %>')">
+                <input type="text" placeholder="Write a comment..." class="comment-input" />
+                <button type="submit">Comment</button>
+            </form>
+        </div>
+    <% }) %>
+</div>
+
+<hr>
+
+<!-- Search -->
+<form action="/user/search" method="GET" class="search">
+    <input type="text" name="q" placeholder="Search users..." id="search-input" />
+    <button type="submit">Search</button>
+</form>
+
+<!-- User list -->
+<h3>Recomandations: </h3>
+<div class="users">
+    <% users.forEach(u => { %>
+        <div class="user">
+            <img src="<%= u.profile_picture %>" alt="avatar" />
+            <p><%= u.username %></p>
+            <!-- data-user-id uses uid to match the db -->
+            <% if (u.isFollowing) { %>
+                <button data-user-id="<%= u.uid %>" onclick="unfollowUser('<%= u.uid %>')">Unfollow</button>
+            <% } else { %>
+                <button data-user-id="<%= u.uid %>" onclick="followUser('<%= u.uid %>')">Follow</button>
+            <% } %>
+        </div>
+    <% }) %>
+</div>
+
+<footer>
+    <p>© 2026 SocialMed</p>
+</footer>
+
+<script src="/js/script.js"></script>
+</body>
+</html>

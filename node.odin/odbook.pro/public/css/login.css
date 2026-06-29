@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+GB+S+Guides&display=swap');
+
+body{
+    font-family:"Playwrite GB S Guides", cursive;
+    font-size:14px;
+    background-image: url(https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDI1LTA1L3NyLWltYWdlLTI4MDUyNS10YS1zLTQwMV8yLmpwZw.jpg);
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    padding:10px;
+}
+#logo{
+    border-radius:50%;
+    width:120px;
+    height:120px;
+}
+
+.log h1{
+    color: rgb(220, 139, 192)
+}
+
+.log{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+
+    background-color: rgba(255, 255, 255, 0.7);
+
+    border-radius:25px;
+
+    padding:20px;
+    align-items:center; /* centers items horizontally */
+}
+
+.log button{
+    margin:20px 15px 15px;
+    padding: 15px;
+    border:none;
+    border-radius:25px;
+    background:rgb(220, 139, 192);
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+    transition:0.2s;
+    font-family:"Playwrite GB S Guides", cursive;
+
+}
+
+.log button:hover{
+    transform:scale(1.05);
+}
+
+.log input, textarea{
+    border-radius: 25px;
+    padding: 5px;
+    display:flex;
+    justify-content:center;
+    margin:30px 0;
+    border-color: rgb(220, 139, 192);
+    font-family:"Playwrite GB S Guides", cursive;
+}
+
+
+a{
+    text-decoration:none;
+}
+
+a:link{ color:black; }
+a:visited{ color:rgb(167, 77, 148); }
+a:hover{ color:rgb(220, 139, 192); }
+a:active{ color:rgb(167, 77, 148); }
+
+
+
+

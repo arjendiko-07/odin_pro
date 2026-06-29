@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="navbar">
+    <img src="/img/logo4.jpg" id="logo" alt="logo">
+    <h2>SocialMed</h2>
+    <a href="/home">Home</a>
+    <a href="/logout">LogOut</a>
+</div>
+
+<div class="search-results">
+    <h3>Search Results</h3>
+
+    <form action="/user/search" method="GET" class="search">
+        <input type="text" name="q" placeholder="Search users..." />
+        <button type="submit">Search</button>
+    </form>
+
+    <% if (users.length === 0) { %>
+        <p>No users found.</p>
+    <% } else { %>
+        <div class="users">
+            <% users.forEach(u => { %>
+                <div class="user">
+                    <img src="<%= u.profile_picture %>" alt="avatar" />
+                    <p><%= u.username %></p>
+                    <button data-user-id="<%= u.uid %>" onclick="followUser('<%= u.uid %>')">
+                        Follow
+                    </button>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+</div>
+
+<footer>
+    <p>© 2026 SocialMed</p>
+</footer>
+
+<script src="/js/script.js"></script>
+</body>
+</html>
