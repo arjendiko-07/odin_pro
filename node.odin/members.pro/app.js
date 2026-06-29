@@ -1,3 +1,5 @@
+require("dotenv").config();
+console.log("SECRET:", process.env.SESSION_SECRET);
 const express = require("express");//loads the express framework
 const session=require("express-session");//loads express-session handles user login sessions
 const passport=require("passport");//loads passport.js -handles the actual authentication logic(checking username/passsword, managing login/logout)

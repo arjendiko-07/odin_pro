@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--shows all the posts(including drafts).has buttons to publish, edit, or delete each post-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" herf="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>My Posts</h1>
+        <div>
+            <a href="editor.html"><button>+ New Post</button></a>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div id="posts-container"></div>
+
+    <script>
+        const API = 'http://localhost:3000';
+        const token = localStorage.getItem('token');
+
+        if(!token)window.location.href='index.html';
+
+        async function loadPosts(){
+            const res=await fetch('${API}/posts/all',{
+                headers: {'Authorization': 'Bearer ${token}'}
+            });
+            const posts=await res.json();
+            const container = document.getElementById('posts-container');
+
+            if(posts.length===0){
+                conatiner.innerHTML='<p>No posts yet</p>';
+                return;
+            }
+
+            conatiner.innerHTML=posts.map(post=>`
+            <div class="post-card">
+                <div>
+                    <h2>${post.title}</h2>
+                    <span class="badge ${post.is_published ? 'published' : 'draft'}">
+                    ${post.is_published ? 'Published': 'Draft'}
+                </div>
+                <div class="actions">
+                    <button onclick="editPost(${post.id}, ${post.is_published})">
+                        ${post.is_published ? 'Unpublish': 'Publish'}
+                        </button>
+                        <button class="danger" onclick="deletePost(${post.id})">Delete</button>    
+                </div>
+            </div>
+            `).join('');
+        }
+
+        function editPost(id){
+            window.location.href='editor.html?id=${id}';
+        }
+
+        async function togglePublish(id, currentStatus){
+            const res=await fetch('${API}/post/${id}');
+            const post =await res.json();
+
+            await fetch('${API}/posts/${id}', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ${token}'
+                },
+
+                body: JSON.stringify({
+                    title: post.title,
+                    content: post.content,
+                    is_published: !currentStatus
+                })
+            });
+            loadPosts();
+        }
+
+        async function deletePost(id){
+            if(!confirm('Delete this post?')) return;
+
+            await fetch('${API}/post/${id}',{
+                method: 'DELETE',
+                headers: { 'Authorization': 'Bearer ${token}' }
+            });
+            loadPosts();
+        }
+
+        function logout(){
+            localStorage.removeItem('token');
+            window.location.href='index.html';
+        }
+        loadPosts();
+    </script>
+</body>
+</html>

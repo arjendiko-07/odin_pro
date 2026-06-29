@@ -1,50 +1,44 @@
-const express=require("express");
-const router =express.Router();//standart router setup
-const passport = require("../config/passport");//loads the passport configuration
-const prisma=require("../config/prisma");//loads the prisma file for db operations
-const bcrypt=require("bcrypt");//loads bycrypt for password hashing 
+const express = require("express");
+const router = express.Router();
+const passport = require("../config/passport");
+const { sql, poolPromise } = require("../config/db");
+const bcrypt = require("bcryptjs");
 
-router.get("/signup", (req, res)=>{
-    res.render("signup");//just shows the signup form
+router.get("/signup", (req, res) => {
+    res.render("signup");
 });
 
-router.post("/signup", async(req, res)=>{
-    const {firstName, lastName, email, password}=req.body;
-    //destructures from fields from the submitted form data, these attributes must match the name attribute in signup.ejs
+router.post("/signup", async (req, res) => {
+    const { firstName, lastName, email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    const hashedPassword=await bcrypt.hash(password, 10);
-    //hashes the plain text password before storing it
+    const pool = await poolPromise;
+    await pool.request()
+        .input("FirstName", sql.NVarChar, firstName)
+        .input("LastName", sql.NVarChar, lastName)
+        .input("Email", sql.NVarChar, email)
+        .input("PasswordHash", sql.NVarChar, hashedPassword)
+        .query("INSERT INTO users (FirstName, LastName, Email, PasswordHash) VALUES (@FirstName, @LastName, @Email, @PasswordHash)");
 
-    await prisma.user.create({
-        data: {
-            firstName,
-            lastName,
-            email,
-            password: hashedPassword,//stores the hashed passwords
-        },
-    });
-
-    res.redirect("/auth/login");//after creating the account, send the user to the login page
+    res.redirect("/auth/login");
 });
 
-router.get("/login", (req, res)=>{
-    res.render("login");//just shows the login form
+router.get("/login", (req, res) => {
+    res.render("login");
 });
 
 router.post(
     "/login",
     passport.authenticate("local", {
-        //"local" refers to the localStrategy you deffine in config/passport.js
-        successRedirect: "/",//if login is succesful send user to home page
-        failureRedirect: "/auth/login",//if login fails send back to login page
+        successRedirect: "/",
+        failureRedirect: "/auth/login",
     })
 );
 
-router.get("/logout", (req, res)=>{
-    req.logout(()=>{
-        //req.logout() is provided by Passport, it clears the user from the session, the callback is required in a newer version pf passport
-        res.redirect("/");//after loging out go back to home page
+router.get("/logout", (req, res) => {
+    req.logout(() => {
+        res.redirect("/");
     });
 });
 
-module.exports=router;
+module.exports = router;

@@ -1,0 +1,295 @@
+/* ── Reset & Base ──────────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  background: #1a1a2e;
+  color: #eee;
+  min-height: 100vh;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ── Picker Screen ─────────────────────────────────────────────────────────── */
+#picker-screen {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+#picker-screen h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #e94560;
+}
+
+#image-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* Each level card in the picker */
+.image-card {
+  background: #16213e;
+  border: 2px solid #e94560;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  width: 260px;
+  transition: transform 0.2s;
+}
+
+.image-card:hover {
+  transform: scale(1.03);
+}
+
+.image-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.image-card p {
+  padding: 10px;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* ── Top Bar ───────────────────────────────────────────────────────────────── */
+#top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #16213e;
+  border-bottom: 2px solid #e94560;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+#timer {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #e94560;
+}
+
+#characters-to-find {
+  display: flex;
+  gap: 20px;
+  font-size: 0.95rem;
+}
+
+/* Each character badge in the top bar */
+.char-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #0f3460;
+  border: 1px solid #555;
+}
+
+/* Badge turns green when found */
+.char-badge.found {
+  background: #1a6b3c;
+  border-color: #2ecc71;
+  color: #2ecc71;
+}
+
+/* ── Image Wrapper ─────────────────────────────────────────────────────────── */
+#image-wrapper {
+  position: relative; /* So targeting box and markers are positioned relative to this */
+  display: inline-block;
+  width: 100%;
+}
+
+#game-image {
+  display: block;
+  width: 100%;
+  cursor: crosshair;
+}
+
+/* ── Targeting Box ─────────────────────────────────────────────────────────── */
+#targeting-box {
+  position: absolute;  /* Placed relative to #image-wrapper */
+  width: 100px;
+  height: 100px;
+  border: 3px solid #e94560;
+  border-radius: 4px;
+  /* We shift it so the click point is at the center */
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  pointer-events: none; /* The box itself doesn't block clicks */
+}
+
+/* The crosshair dot in the center of the box */
+#target-crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: #e94560;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ── Character Dropdown ────────────────────────────────────────────────────── */
+#character-dropdown {
+  position: absolute;
+  top: 105%;   /* Just below the targeting box */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #16213e;
+  border: 1px solid #e94560;
+  border-radius: 6px;
+  list-style: none;
+  min-width: 140px;
+  pointer-events: all; /* This part IS clickable */
+  z-index: 30;
+}
+
+#character-dropdown li {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  border-bottom: 1px solid #333;
+}
+
+#character-dropdown li:last-child {
+  border-bottom: none;
+}
+
+#character-dropdown li:hover {
+  background: #0f3460;
+}
+
+/* ── Correct Marker ────────────────────────────────────────────────────────── */
+/* A pin placed on the image when a character is found */
+.marker {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: #2ecc71;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%); /* Center on the character's position */
+  z-index: 15;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: bold;
+  color: #000;
+}
+
+/* ── Feedback Toast ────────────────────────────────────────────────────────── */
+/* Small message that briefly appears (correct / wrong) */
+#toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+#toast.show {
+  opacity: 1;
+}
+
+/* ── End Screen ────────────────────────────────────────────────────────────── */
+#end-screen {
+  position: fixed;
+  inset: 0; /* covers the whole page */
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+#end-card {
+  background: #16213e;
+  border: 2px solid #e94560;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+}
+
+#end-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #e94560;
+}
+
+#end-card p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+#name-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #555;
+  background: #0f3460;
+  color: #fff;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+#save-score-btn, #play-again-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+#save-score-btn {
+  background: #e94560;
+  color: #fff;
+}
+
+#play-again-btn {
+  background: #0f3460;
+  color: #eee;
+}
+
+#end-card h3 {
+  margin: 20px 0 10px;
+  color: #aaa;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+#leaderboard-list {
+  text-align: left;
+  padding-left: 20px;
+}
+
+#leaderboard-list li {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}

@@ -1,27 +1,24 @@
-const express=require("express");
+const express = require("express");
 const router = express.Router();
-const prisma=require("../config/prisma");
+const { sql, poolPromise } = require("../config/db");
 
-router.get("/new", (req, res)=>{
-    if(!req.user)return res.redirect("/auth/login");
-    //guard: must be logged in to see the form, inline "if" without braces, works fine for single-line guards
+router.get("/new", (req, res) => {
+    if (!req.user) return res.redirect("/auth/login");
     res.render("createMss");
 });
 
-router.post("/new", async(req, res)=>{
-    if(!req.user)return res.redirect("/auth/login");//same guard on the POST route- prevents direct API calls withot login
+router.post("/new", async (req, res) => {
+    if (!req.user) return res.redirect("/auth/login");
 
-    const {title, text}=req.body;//gets title and text from the submitted from
+    const { title, text } = req.body;
+    const pool = await poolPromise;
+    await pool.request()
+        .input("Title", sql.NVarChar, title)
+        .input("MessageText", sql.NVarChar, text)
+        .input("UserId", sql.Int, req.user.Id)
+        .query("INSERT INTO Messages (Title, MessageText, UserId) VALUES (@Title, @MessageText, @UserId)");
 
-    await prisma.message.create({
-        data: {
-            title,
-            text,
-            userId: req.user.id,//links the message to the logged-in useer,
-        },
-    });
-
-    res.redirect("/");//after posting, go back to home to see the new message
+    res.redirect("/");
 });
 
-module.exports=router;
+module.exports = router;

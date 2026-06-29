@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--login page. sends creditials to the API and saves the JWT in localStorage-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="form-box">
+        <h1>Author Login</h1>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password...">
+        <button onclick="login()">Login</button>
+        <p id="error-msg"></p>
+    </div>
+
+    <script>
+        const API = 'http://localhost:3000';
+
+        async function login(){
+            const username=document.getElementById('username').value.trim();
+            const passowrd=document.getElementById('password').value.trim();
+
+            const res = await fetch('${API}/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({username, passowrd})
+            });
+
+            const data = await res.json();
+            if(!res.ok){
+                document.getElementById('error-msg').textContent=data.message;
+                return;
+            }
+
+            localStorage.setItem('token', data.token);
+            window.location.href='dashboard.html';
+        }
+    </script>
+</body>
+</html>

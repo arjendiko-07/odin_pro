@@ -1,0 +1,59 @@
+body {
+    font-family: sans-serif;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 500px;
+    margin-top: 20px;
+}
+
+.form-box input,
+.form-box textarea {
+    padding: 8px;
+    font-size: 15px;
+}
+
+.post-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+}
+
+.badge {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.published { background: #d4edda; color: #155724; }
+.draft     { background: #fff3cd; color: #856404; }
+
+.comment {
+    border-left: 3px solid #ddd;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+}
+
+button { padding: 6px 12px; cursor: pointer; }
+button.danger { background: #dc3545; color: white; border: none; }

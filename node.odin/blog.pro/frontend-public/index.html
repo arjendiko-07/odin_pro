@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--fetches all published posts from the api and displays them as clickable cards-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Blog</h1>
+    <div id="posts-container"></div>
+
+    <script>
+        const API = 'http://localhost:3000';
+
+        async function loadPosts(){
+            const res = await fetch(`${API}/post`);
+            const posts = await res.json();
+
+            const container = document.getElementById('posts-container');
+
+            if(posts.length===0){
+                constainer.innerHTML='<p>No posts yet.</p>';
+                return;
+            }
+
+            posts.forEach(post=>{
+                const div = document.createElement('div');
+                div.className='post-card';
+                div.innerHTML=`
+                <h2>${post.title}</h2>
+                <p>${new Date(post.create_at).toLocaleDateString()}</p>
+                <a herf="post.html?id=${post.id}">Read more </a>
+                `;
+                container.appendChild(div);
+
+            });
+        }
+        loadPosts();
+    </script>
+</body>
+</html>

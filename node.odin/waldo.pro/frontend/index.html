@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Where is Waldo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!--user picks which image/level to play-->
+    <div id="picker-screen">
+        <h1>Where is Wlado?</h1>
+        <p>Choose a level to play:</p>
+        <div id="image-list">
+            <p>Loading levels...</p>
+        </div>
+    </div>
+
+    <!--hidden until a level is choosen-->>
+
+    <div id="game-screen" class="hidden">
+        <!--top bar: timer+which character to find-->
+        <div id="top-bar">
+            <div id="timer">Time: <span id="time-display">0</span>s</div>
+            <div id="characters-to-find"></div>
+        </div>
+        <div id="image-wrapper">
+            <img id="game-image" src="" alt="Wheres Waldo"/>
+            <!--targeting box: apperas when users clicks, hidden by default-->
+            <div id="targeting-box" class="hidden">
+                
+                <div id="target-crosshair"></div>
+
+                <!--dropdown list of characters to guess-->
+                <ul id="character-dropdown">
+                    <!--items build by app.js-->
+                </ul>
+            </div>
+            <!--correct markers: one placed per found character, dinamicaly added by app.js-->
+        </div>
+    </div>
+
+    <div id="end-screen" class="hidden">
+        <div id="end-card">
+            <h2>You found everyone!</h2>
+            <p>Your time: <span id="final-time"></span>seconds</p>
+            <input id="name-input" type="text" placeholder="Enter your name" maxlength="50"/>
+            <button id="save-score-btn">Save Score</button>
+
+            <h3>Leaderboard</h3>
+            <ol id="Leaderboard-list">
+                <!--scores added by app.js-->
+            </ol>
+
+            <button id="play-again-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,42 +1,31 @@
 const express = require("express");
 const router = express.Router();
-const prisma = require("../config/prisma");//loads prisma clients for DB queries
+const { sql, poolPromise } = require("../config/db");
 
 router.get("/", async (req, res) => {
-    const messages = await prisma.message.findMany({
-        include: { user: true },//include tells prisma to also fetch the related user for each message
-        orderBy: { createdAt: "desc" },//sorts messages newest first
-    });
-
-    const user = req.user;//req.user is set by Passport after a successful login
-    const isMember = user?.isMember || false;//
-    const isAdmin = user?.isAdmin || false;//same pattern for admin status
+    const pool = await poolPromise;
+    const result = await pool.request().query(`
+        SELECT m.Id, m.Title, m.MessageText, m.CrearedAt, u.FirstName
+        FROM Messages m
+        JOIN users u ON m.UserId = u.Id
+        ORDER BY m.CrearedAt DESC
+    `);
 
     res.render("index", {
-        user,
-        messages,
-        isMember,
-        isAdmin,
-        //all these variables become available inside index.ejs
+        user: req.user,
+        messages: result.recordset,
     });
 });
 
 router.post("/delete/:id", async (req, res) => {
-    if (!req.user || !req.user.isAdmin) {
-        return res.status(403).send("Forbidden");
-        //403="you dont have premission", keeps the logins who arent admins out
-    }
+    if (!req.user) return res.status(403).send("Forbidden");
 
-    const messageId = parseInt(req.params.id);
-    //req.params.id comes as a string from URL so we use parseInt to convert it to number
+    const pool = await poolPromise;
+    await pool.request()
+        .input("Id", sql.Int, parseInt(req.params.id))
+        .query("DELETE FROM Messages WHERE Id = @Id");
 
-    await prisma.message.delete({
-        where: {
-            id: messageId,//delets the specific message with this id
-        },
-    });
-
-    res.redirect("/");//after deleting, go back to home page to see updated list
+    res.redirect("/");
 });
 
 module.exports = router;

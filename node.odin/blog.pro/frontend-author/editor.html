@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--a form for writting a new post or editing an existing one. also shows comments on the post so we can delete them-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="dashboard.html">Back to dashboard</a>
+    <div class="form-box">
+        <h1 id="editor-title">New Post</h1>
+        <input type="text" id="title" placeholder="Post title..">
+        <textarea id="content" placeholder="Write your post here..." rows="12"></textarea>
+        <label>
+            <input type="checkbox" id="is_published">Publish immeaditly
+        </label>
+        <button onclick="savePost()">Save</button>
+        <p id="msg"></p>
+    </div>
+
+    <div id="comment-section" style="display:none">
+        <hr>
+        <h2>Comments</h2>
+        <div id="comments-container"></div>
+    </div>
+
+    <script>
+        const API = 'http://localhost:3000';
+        const token = localStorage.getItem('token');
+
+        if(!token) window.location.herf='index.html';
+
+        const params = new URLSearchParams(window.location.search);
+        const postId=params.get('id');
+
+        async function loadPost(){
+            if(!postId)return;
+
+            document.getElementById('editor-title').textContent='EditPost';
+
+            const res = await fetch()
+        }
+    </script>
+</body>
+</html>

@@ -1,40 +1,26 @@
 const express = require("express");
 const router = express.Router();
-const prisma = require("../config/prisma");
+const { sql, poolPromise } = require("../config/db");
 
 router.get("/join", (req, res) => {
-    if (!req.user) {
-        return res.redirect("/auth/login");
-        //if not logged in, cant join
-    }
-
+    if (!req.user) return res.redirect("/auth/login");
     res.render("join");
 });
 
 router.post("/join", async (req, res) => {
-    if (!req.user) {
-        return res.redirect("/auth/login");
-        //same guard, must be logged in to submit the form too
-    }
+    if (!req.user) return res.redirect("/auth/login");
 
-    const { passcode } = req.body;//gets the passcode the user typed from the form
+    const { passcode } = req.body;
+    const SECRET_CODE = "star7";
 
-    const SECRET_CODE = "star7";//the correct passcode to become a member
+    if (passcode !== SECRET_CODE) return res.send("Wrong passcode");
 
-    if (passcode !== SECRET_CODE) {
-        return res.send("Wrong passcode");//if wrong stop here
-    }
+    const pool = await poolPromise;
+    await pool.request()
+        .input("Id", sql.Int, req.user.Id)
+        .query("UPDATE users SET IsMember = 1 WHERE Id = @Id");
 
-    await prisma.user.update({
-        where: {
-            id: req.user.id,//finds the currently logged-in user
-        },
-        data: {
-            isMember: true,//flips their flag to true in the database
-        },
-    });
-
-    res.redirect("/");//after becoming a member, go home page, theyll now see author/date info on messages
+    res.redirect("/");
 });
 
 module.exports = router;

@@ -1,0 +1,37 @@
+body{
+    font-family: sans-serif;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.post-card{
+    border: 1px solid #cab0b0;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 6px;
+}
+
+.comment{
+    border-left: 3px solid #cab0b0;
+    padding: 8px 12px;
+    margin-bottom: 12px;
+}
+
+.comment-form{
+    display:flex;
+    flex-direction: coloumn;
+    gap: 8px;
+    max-width: 400px;
+}
+
+.comment-form input,
+.comment-form textarea{
+    padding: 8px;
+    font-size: 14px;
+}
+
+.comment-form button{
+    padding: 8px;
+    cursor: pointer;
+}
