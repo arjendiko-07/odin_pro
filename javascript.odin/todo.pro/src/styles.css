@@ -1,0 +1,21 @@
+body { display: flex; font-family: sans-serif; margin: 0; }
+#content { display: flex; width: 100%; }
+
+.sidebar { width: 200px; background: #2c3e50; padding: 20px; color: white; }
+.sidebar button { display: block; width: 100%; margin: 5px 0; padding: 8px; cursor: pointer; }
+.sidebar button.active { background: #3498db; }
+.sidebar input { width: 100%; margin-top: 10px; padding: 5px; }
+
+.main { flex: 1; padding: 20px; }
+
+.todo { padding: 10px; margin: 8px 0; border-left: 5px solid gray; background: #f9f9f9; }
+.todo.low { border-color: green; }
+.todo.medium { border-color: orange; }
+.todo.high { border-color: red; }
+.todo.complete { opacity: 0.5; text-decoration: line-through; }
+
+.todo-details.hidden { display: none; }
+
+.todo-form { margin-top: 20px; }
+.todo-form input, .todo-form select { margin: 5px 0; padding: 8px; width: 100%; }
+.todo-form button { padding: 8px 16px; margin-top: 5px; cursor: pointer; }
